@@ -18,7 +18,6 @@ function processFile(filePath) {
   
   rl.on('line', (line) => {
 
-    let key = null;
     const hasKey = line.match(/^(.*?):/);
     if (hasKey) {
       const scssName = hasKey[1];
@@ -35,6 +34,7 @@ function processFile(filePath) {
   rl.on('close', () => {
     console.log('----Finished reading the file.-----');
     console.log(variableMap);
+    initFindAndReplace();
   });
 }
 
@@ -43,6 +43,21 @@ processFile(filePath);
 const directoryPath = path.join(__dirname, 'files'); // Replace with the path to your directory
 const searchText = 'old_text'; // Replace with the text you want to find
 const replaceText = 'new_text'; // Replace with the text you want to replace
+
+console.log(variableMap.length);
+
+function initFindAndReplace() {
+  if (variableMap.length > 0) {
+    variableMap.forEach((variable) => {
+      const key = Object.keys(variable)[0];
+      const value = variable[key];
+      console.log('---');
+      console.log(key, value);
+      console.log('---');
+      // scanAndReplace(directoryPath, key, value);
+    });
+  }
+}
 
 function scanAndReplace(directoryPath, searchText, replaceText) {
   fs.readdir(directoryPath, (err, files) => {
