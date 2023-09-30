@@ -61,15 +61,11 @@ function initFindAndReplace(variableMap) {
 }
 
 function scanAndReplace(directoryPath, searchText, replaceText) {
-  fs.readdir(directoryPath, (err, files) => {
-    if (err) {
-      console.error(`Error reading directory: ${err}`);
-      return;
-    }
-
-    files.forEach((file) => {
-      const filePath = path.join(directoryPath, file);
-
+  try {
+    const files = fs.readdirSync(directoryPath);
+    files.map(fileName => {
+      console.log('path.join(directoryPath, fileName)', path.join(directoryPath, fileName));
+      const filePath = path.join(directoryPath, fileName);
       fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
           console.error(`Error reading file ${filePath}: ${err}`);
@@ -87,19 +83,53 @@ function scanAndReplace(directoryPath, searchText, replaceText) {
         console.log('---');
 
         try {
-          fs.writeFile(filePath, updatedData, 'utf8', (err) => {
-            if (err) {
-              console.error(`Error writing file ${filePath}: ${err}`);
-              return;
-            }
-            console.log(`Updated file: ${filePath}`);
-          });
-        } catch (err) {
-          console.error(`Error writing file ${filePath}: ${err}`);
+          fs.writeFileSync(filePath, updatedData, 'utf8');
+          console.log('File written successfully.');
+          return path.join(directoryPath, fileName);
+        } catch (error) {
+          console.error('Error writing file:', error);
+          return path.join(directoryPath, fileName);
         }
       });
     });
-  });
+    console.log('Directory contents:', files);
+  } catch (error) {
+    console.error('Error reading directory:', error);
+  }
+  // fs.readdir(directoryPath, (err, files) => {
+  //   if (err) {
+  //     console.error(`Error reading directory: ${err}`);
+  //     return;
+  //   }
+
+  //   files.forEach((file) => {
+  //     const filePath = path.join(directoryPath, file);
+
+  //     fs.readFile(filePath, 'utf8', (err, data) => {
+  //       if (err) {
+  //         console.error(`Error reading file ${filePath}: ${err}`);
+  //         return;
+  //       }
+
+  //       // console.log(`Replacing ${searchText} with ${replaceText} in ${filePath}`);
+  //       // console.log('typeof searchText', typeof searchText);
+  //       // console.log('typeof replaceText', typeof replaceText);
+
+  //       const escapedSearchText = escapeRegexp(searchText);
+  //       const escapedReplaceText = escapeRegexp(replaceText);
+  //       const updatedData = data.replace(new RegExp(escapedSearchText, 'g'), replaceText);
+  //       console.log('updatedData: ', updatedData);
+  //       console.log('---');
+
+  //       try {
+  //         fs.writeFileSync(filePath, updatedData, 'utf8');
+  //         console.log('File written successfully.');
+  //       } catch (error) {
+  //         console.error('Error writing file:', error);
+  //       }
+  //     });
+  //   });
+  // });
 }
 
 const originalText = "This is a $foo text with $foo data.";
