@@ -17,32 +17,23 @@ function processFile(filePath) {
   });
   
   rl.on('line', (line) => {
-    // Process each line here
-    // console.log(`Line: ${line}`);
 
     let key = null;
-    const hasKey = line.match(/\$(.*?):/);
+    const hasKey = line.match(/^(.*?):/);
     if (hasKey) {
-      key = camelToKebab(hasKey[1]);
-      console.log('key: ' + key); // Output: "some_text"
-    }
+      const scssName = hasKey[1];
+      const customPropName = camelToKebab(hasKey[1]).substring(1);
 
-    let value = null;
-    const hasValue = line.match(/:(.*?);/);
-    if (hasValue) {
-      value = hasValue[1].substring(1);
-      console.log('value: ' + value); // Output: "some_text"
-    }
-
-    if (key && value) {
-      variableMap.push({
-        [key]: value,
-      });
+      if (scssName && customPropName) {
+        variableMap.push({
+          [scssName]: `var(--${customPropName})`,
+        });
+      }
     }
   });
   
   rl.on('close', () => {
-    console.log('Finished reading the file.');
+    console.log('----Finished reading the file.-----');
     console.log(variableMap);
   });
 }
