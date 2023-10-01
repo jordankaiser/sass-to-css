@@ -1,4 +1,4 @@
 const path = require('path');
-const processedFile = require('./js/processedFile.js');
+const process = require('./js/process.js');
 
-processedFile(path.join(__dirname, 'variables', 'index.scss'));
+process(path.join(__dirname, 'variables', 'index.scss'));
