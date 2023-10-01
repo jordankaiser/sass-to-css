@@ -7,7 +7,7 @@ function camelToKebab(camelCase) {
   return camelCase.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
-function process(filePath) {
+function transformVariables(filePath) {
   const variableMap = [];
 
   const rl = readline.createInterface({
@@ -38,4 +38,4 @@ function process(filePath) {
   });
 }
 
-module.exports = process;
+module.exports = transformVariables;

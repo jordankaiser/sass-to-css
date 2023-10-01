@@ -1,4 +1,4 @@
 const path = require('path');
-const process = require('./js/process.js');
+const transformVariables = require('./js/transformVariables.js');
 
-process(path.join(__dirname, 'variables', 'index.scss'));
+transformVariables(path.join(__dirname, 'variables', 'index.scss'));
