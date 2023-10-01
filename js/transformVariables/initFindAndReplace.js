@@ -7,7 +7,12 @@ function initFindAndReplace(variableMap) {
     Array.from(variableMap).forEach((variable) => {
       const key = Object.keys(variable)[0];
       const value = variable[key];
-      scanAndReplace(directoryPath, key, value);
+      scanAndReplace(directoryPath, [
+        {
+          value: `${key};`,
+          type: 'semicolon',
+        },
+      ], value);
     });
   }
 }
