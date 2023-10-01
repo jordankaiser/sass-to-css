@@ -1,7 +1,9 @@
 const fs = require('fs');
+// const util = require('util');
 const path = require('path');
 const readline = require('readline');
 const escapeRegexp = require("escape-string-regexp-node");
+// const readdir = util.promisify(fs.readdir);
 
 function camelToKebab(camelCase) {
   return camelCase.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
@@ -60,26 +62,22 @@ function initFindAndReplace(variableMap) {
 
 function scanAndReplace(directoryPath, searchText, replaceText) {
   try {
-    const files = fs.readdirSync(directoryPath);
+    const files = fs.readdirSync(directoryPath)
     files.map(fileName => {
-      console.log('path.join(directoryPath, fileName)', path.join(directoryPath, fileName));
       const filePath = path.join(directoryPath, fileName);
-      fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-          console.error(`Error reading file ${filePath}: ${err}`);
-          return;
-        }
-
+      try {
+        const file = fs.readFileSync(filePath, 'utf8');
+        console.log('file typeof', typeof file);
         // console.log(`Replacing ${searchText} with ${replaceText} in ${filePath}`);
         // console.log('typeof searchText', typeof searchText);
         // console.log('typeof replaceText', typeof replaceText);
-
+  
         const escapedSearchText = escapeRegexp(searchText);
         const escapedReplaceText = escapeRegexp(replaceText);
-        const updatedData = data.replace(new RegExp(escapedSearchText, 'g'), replaceText);
+        const updatedData = file.replace(new RegExp(escapedSearchText, 'g'), replaceText);
         console.log('updatedData: ', updatedData);
         console.log('---');
-
+  
         try {
           fs.writeFileSync(filePath, updatedData, 'utf8');
           console.log('File written successfully.');
@@ -88,9 +86,10 @@ function scanAndReplace(directoryPath, searchText, replaceText) {
           console.error('Error writing file:', error);
           return path.join(directoryPath, fileName);
         }
-      });
+      }  catch (error) {
+        console.error('Error reading file:', error);
+      }
     });
-    console.log('Directory contents:', files);
   } catch (error) {
     console.error('Error reading directory:', error);
   }
@@ -137,4 +136,4 @@ const searchTextBlah = "$foo";
 const replacementText = "var(--foo)";
 const modifiedText = originalText.replace(new RegExp(searchTextBlah, 'g'), replacementText);
 
-console.log(modifiedText); // Output: "This is a replacement text with replacement data."
+// console.log(modifiedText); // Output: "This is a replacement text with replacement data."
