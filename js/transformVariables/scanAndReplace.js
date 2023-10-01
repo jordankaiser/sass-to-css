@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const escapeRegexp = require("escape-string-regexp-node");
+const { rejects } = require('assert');
 
 function scanAndReplace(directoryPath, searchTexts, replaceText) {
   try {
@@ -12,29 +13,34 @@ function scanAndReplace(directoryPath, searchTexts, replaceText) {
         
         searchTexts.forEach(searchText => {
           const escapedSearchText = escapeRegexp(searchText.value);
-          console.log('searchText.value', searchText.value);
-          console.log('searchText.type', searchText.type)
-          console.log('escapedSearchText', escapedSearchText);
+          // console.log('searchText.value', searchText.value);
+          // console.log('searchText.type', searchText.type)
+          // console.log('escapedSearchText', escapedSearchText);
           // console.log('-------------------');
           let updatedData = null;
           // console.log('searchText.type', searchText.type);
           switch (searchText.type) {
             case 'space':
               updatedData = file.replace(new RegExp(escapedSearchText, 'g'), `${replaceText} `);
-              console.log('original', file);
-              console.log('updated', updatedData);
-              console.log('-------------');
-              writeFile(filePath, updatedData, directoryPath, fileName);
+              const foo = async () => {
+                await writeFile(filePath, updatedData, directoryPath, fileName);
+              }
+              foo();
               break;
               
             case 'semicolon':
               updatedData = file.replace(new RegExp(escapedSearchText, 'g'), `${replaceText};`);
-              writeFile(filePath, updatedData, directoryPath, fileName);
+              const foo2 = async () => {
+                await writeFile(filePath, updatedData);
+              }
+              foo2();
               break;
               
             case 'colon':
               updatedData = file.replace(new RegExp(escapedSearchText, 'g'), `${replaceText},`);
-              writeFile(filePath, updatedData, directoryPath, fileName);
+              async () => {
+                await writeFile(filePath, updatedData, directoryPath, fileName);
+              }
               break;
               
             default:
@@ -56,14 +62,16 @@ function scanAndReplace(directoryPath, searchTexts, replaceText) {
   }
 }
 
-function writeFile(filePath, updatedData, directoryPath, fileName) {
-  try {
-    fs.writeFileSync(filePath, updatedData, 'utf8');
-    return path.join(directoryPath, fileName);
-  } catch (error) {
-    console.error('Error writing file:', error);
-    return path.join(directoryPath, fileName);
-  }
+async function writeFile(filePath, updatedData) {
+  return new Promise((resolve, reject) => {
+    try {
+      fs.writeFileSync(filePath, updatedData, 'utf8');
+      resolve();
+    } catch (error) {
+      console.error('Error writing file:', error);
+      reject();
+    }
+  });
 }
 
 module.exports = scanAndReplace;

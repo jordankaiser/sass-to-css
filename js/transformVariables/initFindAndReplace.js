@@ -9,8 +9,14 @@ function initFindAndReplace(variableMap) {
       const value = variable[key];
       scanAndReplace(directoryPath, [
         {
+          value: `${key} `,
+          type: 'space',
+        }, {
           value: `${key};`,
           type: 'semicolon',
+        }, {
+          value: `${key},`,
+          type: 'colon',
         },
       ], value);
     });
