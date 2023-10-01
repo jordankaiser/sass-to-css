@@ -22,7 +22,7 @@ function processFile(filePath) {
     const hasKey = line.match(/^(.*?):/);
     if (hasKey) {
       const scssName = hasKey[1];
-      const customPropName = `/${camelToKebab(hasKey[1]).substring(1)}`;
+      const customPropName = `${camelToKebab(hasKey[1]).substring(1)}`;
 
       if (scssName && customPropName) {
         variableMap.push({
@@ -41,8 +41,6 @@ function processFile(filePath) {
 processFile(filePath);
 
 const directoryPath = path.join(__dirname, 'files'); // Replace with the path to your directory
-const searchText = 'old_text'; // Replace with the text you want to find
-const replaceText = 'new_text'; // Replace with the text you want to replace
 
 function initFindAndReplace(variableMap) {
   if (variableMap.length > 0) {
