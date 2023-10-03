@@ -1,5 +1,5 @@
 const path = require('path');
-const {getDirectories, getFileText, writeFile} = require('./scanAndReplace');
+const {getDirectories, getFileText, writeFile, getReplacedFileText} = require('./scanAndReplace');
 
 async function initFindAndReplace(variableMap) {
   if (variableMap.length > 0) {
@@ -38,10 +38,20 @@ async function initFindAndReplace(variableMap) {
     const filesText = [];
     for (const file of directories) {
       const fileText = await getFileText(file);
-      filesText.push(fileText);
+      filesText.push({
+        text: fileText,
+        path: file,
+      });
     }
-    console.log('stylingDatum: ', stylingDatum);
+    // console.log('stylingDatum: ', stylingDatum);
     // TODO: Need to combine stylingDatum with filesText the loop through using writeFile().
+    for (const file of filesText) {
+      const replacedFileText = await getReplacedFileText(file.text, stylingDatum);
+      await writeFile(file.path, replacedFileText);
+      // console.log('\nreplacedFileText:');
+      // console.log(replacedFileText);
+      // console.log('****');
+    }
     for (const stylingData of stylingDatum) {
       // console.log('files: ', files);
       // for (const file of files) {

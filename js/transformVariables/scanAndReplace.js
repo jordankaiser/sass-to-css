@@ -25,37 +25,66 @@ async function getFileText(file) {
   });
 }
 
-async function writeFile(file, stylingData) {
+async function getReplacedFileText(file, stylingDatum) {
   return new Promise((resolve, reject) => {
-    try {
-      // console.log('file: ', file);
-      // console.log('stylingData: ', stylingData);
-      // let updatedData = null;
-      // const escapedSearchText = escapeRegexp(searchText);
-      // switch (type) {
-      //   case 'space':
-      //     updatedData = file.replace(new RegExp(escapedSearchText, 'g'), `${replaceText} `);
-      //     break;
-          
-      //   case 'semicolon':
-      //     updatedData = file.replace(new RegExp(escapedSearchText, 'g'), `${replaceText};`);
-      //     break;
-          
-      //   case 'colon':
-      //     updatedData = file.replace(new RegExp(escapedSearchText, 'g'), `${replaceText},`);
-      //     break;
-          
-      //   default:
-      //     console.error('Error: searchText.type not found');
-      //     return;
-      // }
-      // fs.writeFileSync(filePath, updatedData, 'utf8');
-      // resolve();
-    } catch (error) {
-      console.error('Error writing file:', error);
+    if (file && stylingDatum) {
+      // console.log('\nfile:');
+      // console.log(file);
+      // console.log('\nstylingDatum:');
+      // console.log(stylingDatum);
+      // console.log('---');
+      let updatedData = null;
+      for (const stylingData of stylingDatum) {
+        // console.log('\nstylingData.replacement:');
+        // console.log(stylingData.replacement);
+        // console.log('\nstylingData.needle:');
+        // console.log(stylingData.needle);
+        // console.log('\nstylingData.type:');
+        // console.log(stylingData.type);
+        // console.log('\nfile:');
+        // console.log(file);
+        // console.log('---');
+        const escapedSearchText = escapeRegexp(stylingData.needle);
+        switch (stylingData.type) {
+          case 'space':
+            if (!updatedData) {
+              updatedData = file.replace(new RegExp(escapedSearchText, 'g'), `${stylingData.replacement} `);
+            } else {
+              updatedData = updatedData.replace(new RegExp(escapedSearchText, 'g'), `${stylingData.replacement} `);
+            }
+            break;
+            
+          case 'semicolon':
+            if (!updatedData) {
+              updatedData = file.replace(new RegExp(escapedSearchText, 'g'), `${stylingData.replacement};`);
+            } else {
+              updatedData = updatedData.replace(new RegExp(escapedSearchText, 'g'), `${stylingData.replacement};`);
+            }
+            break;
+            
+          case 'colon':
+            if (!updatedData) {
+              updatedData = file.replace(new RegExp(escapedSearchText, 'g'), `${stylingData.replacement},`);
+            } else {
+              updatedData = updatedData.replace(new RegExp(escapedSearchText, 'g'), `${stylingData.replacement},`);
+            }
+            break;
+            
+          default:
+            console.error('Error: searchText.type not found');
+            return;
+        }
+      }
+      resolve(updatedData);
+    } else {
+      console.error('Error: file or stylingDatum is null');
       reject();
     }
   });
 }
 
-module.exports = {getDirectories, getFileText, writeFile};
+async function writeFile(filePath, updatedData, charset = 'utf8') {
+  fs.writeFileSync(filePath, updatedData, charset);
+}
+
+module.exports = {getDirectories, getFileText, getReplacedFileText, writeFile};
