@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "escape-string-regexp-node": "^1.0.2",
-    "prompts": "^2.4.2"
+    "prompts": "^2.4.2",
+    "sass": "^1.68.0"
   }
 }
