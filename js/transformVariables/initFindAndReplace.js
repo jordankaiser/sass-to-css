@@ -47,7 +47,7 @@ async function initFindAndReplace(variableMap) {
     }
     for (const file of filesText) {
       const replacedFileText = await getReplacedFileText(file.text, stylingDatum);
-      fs.writeFileSync(file.path, replacedFileText, 'utf8');
+      // fs.writeFileSync(file.path, replacedFileText, 'utf8');
     }
   }
 }
