@@ -5,6 +5,7 @@ const findAndReplace = require('./js/findAndReplace/index.js');
 
 /**
  * An array of objects containing the SCSS key, custom property key, and value.
+ * A map of the data needed to tranform SCSS to CSS.
  */
 let variableMap = null;
 
