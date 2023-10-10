@@ -32,4 +32,23 @@ function getFilePath(filePath) {
   const dirname = __dirname;
 }
 
-module.exports = {getDirectories, getFileText, getFilePath};
+/**
+ * Append text to a file.
+ *
+ * @param {string} filePath - The file to append text to.
+ * @param {string} textToAppend - The text to append to the file.
+ */
+async function appendText(filePath, textToAppend) {
+  return new Promise((resolve, reject) => {
+    try {
+      fs.appendFileSync(filePath, textToAppend);
+      console.log('Text appended to the file successfully.');
+      resolve();
+    } catch (err) {
+      console.error('Error appending to the file:', err);
+      reject(err);
+    }
+  });
+}
+
+module.exports = {getDirectories, getFileText, getFilePath, appendText};
