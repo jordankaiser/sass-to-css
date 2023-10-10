@@ -1,6 +1,7 @@
 const path = require('path');
-const transformVariables = require('./js/transformVariables/index.js');
+const createVariableMap = require('./js/transformVariables/index.js');
 const createCustomProps = require('./js/createCustomProps/index.js');
+const initFindAndReplace = require('./js/transformVariables/initFindAndReplace.js');
 
 /**
  * An array of objects containing the SCSS key, custom property key, and value.
@@ -21,7 +22,8 @@ const sassVariablesFile = path.join(__dirname, 'variables', 'index.scss');
  * Initialize.
  */
 async function init() {
-  variableMap = await transformVariables(sassVariablesFile);
+  variableMap = await createVariableMap(sassVariablesFile);
+  await initFindAndReplace(variableMap);
   await createCustomProps(variableMap, outputFile);
 }
 init();

@@ -1,6 +1,5 @@
 const fs = require('fs');
 const readline = require('readline');
-const initFindAndReplace = require('./initFindAndReplace.js');
 
 /**
  * Convert string to kebab case.
@@ -18,7 +17,7 @@ function camelToKebab(theString) {
  * @param {string} filePath - The directory containing the scss.
  * @return {array} An array of objects containing the SCSS key, custom property key, and value.
  */
-async function transformVariables(filePath) {
+async function createVariableMap(filePath) {
   return new Promise((resolve, reject) => {
     try {
       const variableMap = [];
@@ -67,7 +66,6 @@ async function transformVariables(filePath) {
         if (variableMap.length === 0) {
           throw new Error('No variables found.');
         }
-        initFindAndReplace(variableMap);
         resolve(variableMap);
       });
     }  catch (error) {
@@ -76,4 +74,4 @@ async function transformVariables(filePath) {
   });
 }
 
-module.exports = transformVariables;
+module.exports = createVariableMap;
