@@ -39,12 +39,14 @@ function transformVariables(filePath) {
     if (values) {
       data.value = values[0];
     }
-    console.log('data', data);
+
+    if (data.scssKey && data.customPropKey && data.value) {
+      variableMap2.push(data);
+    }
   });
   
   rl.on('close', () => {
-    // console.log('variableMap', variableMap);
-    // initFindAndReplace(variableMap);
+    initFindAndReplace(variableMap, variableMap2);
   });
 }
 

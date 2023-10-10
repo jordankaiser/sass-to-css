@@ -3,11 +3,39 @@ const fs = require('fs');
 const {getReplacedFileText} = require('./scanAndReplace');
 const {getDirectories, getFileText} = require('./../_helpers/index.js');
 
-async function initFindAndReplace(variableMap) {
+async function initFindAndReplace(variableMap, variableMap2) {
   if (variableMap.length > 0) {
     const directoryPath = path.join(__dirname, '..', '..', 'files');
     const searchNeedles = ['semicolon', 'colon', 'space'];
     const stylingDatum = [];
+    const stylingDatum2 = [];
+    variableMap2.forEach((variable) => {
+      return searchNeedles.forEach((needle) => {
+        switch (needle) {
+          case 'semicolon':
+            stylingDatum2.push({
+              replacement: variable.customPropKey,
+              needle: `${variable.scssKey};`,
+              type: 'semicolon',
+            });
+            break;
+          case 'colon':
+            stylingDatum2.push({
+              replacement: variable.customPropKey,
+              needle: `${variable.scssKey},`,
+              type: 'colon',
+            });
+            break;
+          case 'space':
+            stylingDatum2.push({
+              replacement: variable.customPropKey,
+              needle: `${variable.scssKey} `,
+              type: 'space',
+            });
+            break;
+        }
+      });
+    });
     Array.from(variableMap).forEach((variable) => {
       const key = Object.keys(variable)[0];
       return searchNeedles.forEach((needle) => {
