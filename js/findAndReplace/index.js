@@ -4,7 +4,7 @@ const {getReplacedFileText} = require('./scanAndReplace');
 const {getFileText} = require('./../_helpers/index.js');
 const {glob} = require('glob');
 
-async function initFindAndReplace(variableMap) {
+async function findAndReplace(variableMap) {
   if (variableMap.length > 0) {
     const directoryPath = path.join(__dirname, '..', '..', 'files');
     const searchNeedles = ['semicolon', 'colon', 'space'];
@@ -52,4 +52,4 @@ async function initFindAndReplace(variableMap) {
   }
 }
 
-module.exports = initFindAndReplace;
+module.exports = findAndReplace;
