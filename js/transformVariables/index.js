@@ -8,6 +8,7 @@ function camelToKebab(camelCase) {
 
 function transformVariables(filePath) {
   const variableMap = [];
+  const variableMap2 = [];
 
   const rl = readline.createInterface({
     input: fs.createReadStream(filePath),
@@ -16,6 +17,7 @@ function transformVariables(filePath) {
   });
   
   rl.on('line', (line) => {
+    const data = {};
 
     const hasKey = line.match(/^(.*?):/);
     if (hasKey) {
@@ -26,13 +28,23 @@ function transformVariables(filePath) {
         variableMap.push({
           [scssName]: `var(--${customPropName})`,
         });
+        data.scssKey = scssName;
+        data.customPropKey = `var(--${customPropName})`;
       }
     }
+
+    // Values.
+    const values = line.match(/(?<=\s)[^;]+/g);
+    // console.log('values', values);
+    if (values) {
+      data.value = values[0];
+    }
+    console.log('data', data);
   });
   
   rl.on('close', () => {
-    initFindAndReplace(variableMap);
-    return variableMap;
+    // console.log('variableMap', variableMap);
+    // initFindAndReplace(variableMap);
   });
 }
 
