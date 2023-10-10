@@ -42,6 +42,7 @@ async function transformVariables(filePath) {
           const customPropName = `${camelToKebab(getKey[1]).substring(1)}`;
           if (customPropName) {
             data.customPropKey = `var(--${customPropName})`;
+            data.customPropName = `--${customPropName}`;
           }
         }
     

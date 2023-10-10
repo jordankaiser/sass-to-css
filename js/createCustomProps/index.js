@@ -8,19 +8,36 @@ const fs = require('fs');
  * @param {string} filePath - The output file path for the custom properties.
  */
 async function createCustomProps(variableMap, filePath) {
+  await appendText(filePath, '\n:root {');
+  for (const variable of variableMap) {
+    await appendText(filePath, `\n  ${variable.customPropName}: ${variable.value};`);
+  }
+  await appendText(filePath, '\n}');
+  // return new Promise((resolve, reject) => {
+  //   for (const variable of variableMap) {
+  //     const textToAppend = `\n${variable.customPropName}: ${variable.value};`;
+  //     try {
+  //       fs.appendFileSync(filePath, textToAppend);
+  //       console.log('Text appended to the file successfully.');
+  //       resolve();
+  //     } catch (err) {
+  //       console.error('Error appending to the file:', err);
+  //       reject(err);
+  //     }
+  //   }
+  // });
+}
+
+async function appendText(filePath, textToAppend) {
   return new Promise((resolve, reject) => {
-    const textToAppend = '\nThis is new content to append.';
-    for (const variable of variableMap) {
-      try {
-        fs.appendFileSync(filePath, textToAppend);
-        console.log('Text appended to the file successfully.');
-        resolve();
-      } catch (err) {
-        console.error('Error appending to the file:', err);
-        reject(err);
-      }
+    try {
+      fs.appendFileSync(filePath, textToAppend);
+      console.log('Text appended to the file successfully.');
+      resolve();
+    } catch (err) {
+      console.error('Error appending to the file:', err);
+      reject(err);
     }
-    
   });
 }
 
