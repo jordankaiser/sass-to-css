@@ -25,9 +25,9 @@ function transformVariables(filePath) {
       const customPropName = `${camelToKebab(hasKey[1]).substring(1)}`;
 
       if (scssName && customPropName) {
-        variableMap.push({
-          [scssName]: `var(--${customPropName})`,
-        });
+        // variableMap.push({
+        //   [scssName]: `var(--${customPropName})`,
+        // });
         data.scssKey = scssName;
         data.customPropKey = `var(--${customPropName})`;
       }
@@ -35,18 +35,17 @@ function transformVariables(filePath) {
 
     // Values.
     const values = line.match(/(?<=\s)[^;]+/g);
-    // console.log('values', values);
     if (values) {
       data.value = values[0];
     }
 
     if (data.scssKey && data.customPropKey && data.value) {
-      variableMap2.push(data);
+      variableMap.push(data);
     }
   });
   
   rl.on('close', () => {
-    initFindAndReplace(variableMap, variableMap2);
+    initFindAndReplace(variableMap);
   });
 }
 
