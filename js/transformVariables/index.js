@@ -19,24 +19,26 @@ function transformVariables(filePath) {
   rl.on('line', (line) => {
     const data = {};
 
-    const hasKey = line.match(/^(.*?):/);
-    if (hasKey) {
-      const scssName = hasKey[1];
-      const customPropName = `${camelToKebab(hasKey[1]).substring(1)}`;
+    const getKey = line.match(/^(.*?):/);
+    if (getKey) {
 
-      if (scssName && customPropName) {
-        // variableMap.push({
-        //   [scssName]: `var(--${customPropName})`,
-        // });
+      // SCSS Key.
+      const scssName = getKey[1];
+      if (scssName) {
         data.scssKey = scssName;
+      }
+
+      // Custom Property Key.
+      const customPropName = `${camelToKebab(getKey[1]).substring(1)}`;
+      if (customPropName) {
         data.customPropKey = `var(--${customPropName})`;
       }
     }
 
-    // Values.
-    const values = line.match(/(?<=\s)[^;]+/g);
-    if (values) {
-      data.value = values[0];
+    // Value.
+    const value = line.match(/(?<=\s)[^;]+/g);
+    if (value) {
+      data.value = value[0];
     }
 
     if (data.scssKey && data.customPropKey && data.value) {
