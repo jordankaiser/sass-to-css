@@ -49,6 +49,7 @@ function transformVariables(filePath) {
   });
   
   rl.on('close', () => {
+    const foo = variableMap;
     initFindAndReplace(variableMap);
   });
 }

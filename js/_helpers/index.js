@@ -7,8 +7,7 @@ async function getDirectories(directoryPath) {
       const files = fs.readdirSync(directoryPath);
       resolve(files.map(fileName =>  path.join(directoryPath, fileName)));
     } catch (error) {
-      console.error('Error reading directory:', error);
-      reject();
+      reject(error);
     }
   });
 }
