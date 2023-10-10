@@ -1,7 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
 const initFindAndReplace = require('./initFindAndReplace.js');
-const createCustomProps = require('./../createCustomProps/index.js');
 
 function camelToKebab(camelCase) {
   return camelCase.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
@@ -62,7 +61,6 @@ async function transformVariables(filePath) {
           throw new Error('No variables found.');
         }
         initFindAndReplace(variableMap);
-        createCustomProps(variableMap);
         resolve(variableMap);
       });
     }  catch (error) {
