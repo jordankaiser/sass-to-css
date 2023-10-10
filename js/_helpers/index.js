@@ -17,7 +17,6 @@ async function getFileText(file) {
     try {
       resolve(fs.readFileSync(file, 'utf8'));
     }  catch (error) {
-      console.error('Error reading file:', error);
       reject(error);
     }
   });
