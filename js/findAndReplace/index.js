@@ -4,7 +4,7 @@ const {getReplacedFileText} = require('./scanAndReplace');
 const {getFileText} = require('./../_helpers/index.js');
 const {glob} = require('glob');
 
-async function findAndReplace(variableMap, directoryPath) {
+async function findAndReplace(variableMap, directoryPath, sassVariablesFile) {
   if (variableMap.length > 0) {
     const searchNeedles = ['semicolon', 'colon', 'space'];
     const stylingDatum = [];
@@ -35,7 +35,7 @@ async function findAndReplace(variableMap, directoryPath) {
         }
       });
     });
-    const directories = await glob(directoryPath + '/**/*.scss');
+    const directories = await glob(directoryPath + '/**/*.scss', { ignore: '_01.generated-vars.scss' });
     const filesText = [];
     for (const file of directories) {
       const fileText = await getFileText(file);
@@ -45,8 +45,10 @@ async function findAndReplace(variableMap, directoryPath) {
       });
     }
     for (const file of filesText) {
-      const replacedFileText = await getReplacedFileText(file.text, stylingDatum);
-      fs.writeFileSync(file.path, replacedFileText, 'utf8');
+      if (file.text && file.path) {
+        const replacedFileText = await getReplacedFileText(file.text, stylingDatum);
+        fs.writeFileSync(file.path, replacedFileText, 'utf8');
+      }
     }
   }
 }
