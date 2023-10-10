@@ -1,4 +1,3 @@
-const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
 const initFindAndReplace = require('./initFindAndReplace.js');
@@ -12,8 +11,8 @@ function transformVariables(filePath) {
 
   const rl = readline.createInterface({
     input: fs.createReadStream(filePath),
-    output: process.stdout, // You can change this to another writable stream if needed
-    terminal: false, // This prevents readline from treating the input as a TTY (terminal)
+    output: process.stdout,
+    terminal: false,
   });
   
   rl.on('line', (line) => {
@@ -32,7 +31,6 @@ function transformVariables(filePath) {
   });
   
   rl.on('close', () => {
-    // console.log('----Finished reading the file.-----');
     initFindAndReplace(variableMap);
     return variableMap;
   });
