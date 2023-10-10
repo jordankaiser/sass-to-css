@@ -2,8 +2,14 @@ const fs = require('fs');
 const readline = require('readline');
 const initFindAndReplace = require('./initFindAndReplace.js');
 
-function camelToKebab(camelCase) {
-  return camelCase.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+/**
+ * Convert string to kebab case.
+ *
+ * @param {string} theString - The string to convert.
+ * @return {string} The converted string.
+ */
+function camelToKebab(theString) {
+  return theString.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
 /**
