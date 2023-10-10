@@ -1,7 +1,7 @@
 {
-  "name": "nodejstest",
+  "name": "sass-to-css",
   "version": "1.0.0",
-  "description": "test nodejs",
+  "description": "Tools to help convert sass to css",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
