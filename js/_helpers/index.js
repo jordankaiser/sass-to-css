@@ -1,17 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-async function getDirectories(directoryPath) {
-  return new Promise((resolve, reject) => {
-    try {
-      const files = fs.readdirSync(directoryPath);
-      resolve(files.map(fileName =>  path.join(directoryPath, fileName)));
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-
 async function getFileText(file) {
   return new Promise((resolve, reject) => {
     try {
@@ -51,4 +40,4 @@ async function appendText(filePath, textToAppend) {
   });
 }
 
-module.exports = {getDirectories, getFileText, getFilePath, appendText};
+module.exports = {getFileText, getFilePath, appendText};

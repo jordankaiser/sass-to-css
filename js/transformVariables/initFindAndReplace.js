@@ -1,7 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const {getReplacedFileText} = require('./scanAndReplace');
-const {getDirectories, getFileText} = require('./../_helpers/index.js');
+const {getFileText} = require('./../_helpers/index.js');
+const {glob} = require('glob');
 
 async function initFindAndReplace(variableMap) {
   if (variableMap.length > 0) {
@@ -35,7 +36,7 @@ async function initFindAndReplace(variableMap) {
         }
       });
     });
-    const directories = await getDirectories(directoryPath);
+    const directories = await glob(directoryPath + '/**/*.scss');
     const filesText = [];
     for (const file of directories) {
       const fileText = await getFileText(file);
