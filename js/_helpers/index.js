@@ -22,4 +22,14 @@ async function getFileText(file) {
   });
 }
 
-module.exports = {getDirectories, getFileText};
+/**
+ * This is a function.
+ *
+ * @param {string} filePath - A string param
+ */
+function getFilePath(filePath) {
+  const outputFile = path.join(__dirname, 'variables', 'index.scss');
+  const dirname = __dirname;
+}
+
+module.exports = {getDirectories, getFileText, getFilePath};

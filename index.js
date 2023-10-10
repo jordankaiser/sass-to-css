@@ -12,6 +12,7 @@ let variableMap = null;
  */
 async function init() {
   variableMap = await transformVariables(path.join(__dirname, 'variables', 'index.scss'))
-  await createCustomProps(variableMap);
+  const outputFile = path.join(__dirname, 'variables', 'custom-props.css');
+  await createCustomProps(variableMap, outputFile);
 }
 init();
