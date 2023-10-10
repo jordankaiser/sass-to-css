@@ -8,17 +8,19 @@ function camelToKebab(camelCase) {
 
 function transformVariables(filePath) {
   const variableMap = [];
-  const variableMap2 = [];
 
+  // Create a readable stream.
   const rl = readline.createInterface({
     input: fs.createReadStream(filePath),
     output: process.stdout,
     terminal: false,
   });
   
+  // Read each line.
   rl.on('line', (line) => {
     const data = {};
 
+    // Get the SCSS key. This regex matches the first word followed by a colon. 
     const getKey = line.match(/^(.*?):/);
     if (getKey) {
 
@@ -28,14 +30,14 @@ function transformVariables(filePath) {
         data.scssKey = scssName;
       }
 
-      // Custom Property Key.
+      // Custom Property Key. Convert the SCSS key to kebab case and remove the first character.
       const customPropName = `${camelToKebab(getKey[1]).substring(1)}`;
       if (customPropName) {
         data.customPropKey = `var(--${customPropName})`;
       }
     }
 
-    // Value.
+    // Value. This regex matches the first word after a space and before a semicolon.
     const value = line.match(/(?<=\s)[^;]+/g);
     if (value) {
       data.value = value[0];
