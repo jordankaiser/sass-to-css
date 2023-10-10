@@ -1,11 +1,18 @@
 const fs = require('fs');
 const readline = require('readline');
 const initFindAndReplace = require('./initFindAndReplace.js');
+const createCustomProps = require('./../createCustomProps/index.js');
 
 function camelToKebab(camelCase) {
   return camelCase.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
+/**
+ * Transform SCSS variables to CSS custom properties in files.
+ *
+ * @param {string} filePath - The directory containing the scss.
+ * @return {array} An array of objects containing the SCSS key, custom property key, and value.
+ */
 function transformVariables(filePath) {
   const variableMap = [];
 
@@ -49,8 +56,12 @@ function transformVariables(filePath) {
   });
   
   rl.on('close', () => {
-    const foo = variableMap;
+    if (variableMap.length === 0) {
+      throw new Error('No variables found.');
+    }
     initFindAndReplace(variableMap);
+    createCustomProps(variableMap);
+    return variableMap;
   });
 }
 
