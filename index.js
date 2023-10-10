@@ -8,11 +8,15 @@ const createCustomProps = require('./js/createCustomProps/index.js');
 let variableMap = null;
 
 /**
+ * The output file path for the custom properties. Customize as needed.
+ */
+const outputFile = path.join(__dirname, 'variables', 'custom-props.css');
+
+/**
  * Initialize.
  */
 async function init() {
-  variableMap = await transformVariables(path.join(__dirname, 'variables', 'index.scss'))
-  const outputFile = path.join(__dirname, 'variables', 'custom-props.css');
+  variableMap = await transformVariables(path.join(__dirname, 'variables', 'index.scss'));
   await createCustomProps(variableMap, outputFile);
 }
 init();
