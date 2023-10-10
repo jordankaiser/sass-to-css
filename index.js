@@ -13,10 +13,15 @@ let variableMap = null;
 const outputFile = path.join(__dirname, 'variables', 'custom-props.css');
 
 /**
+ * The SCSS variables file path. Customize as needed.
+ */
+const sassVariablesFile = path.join(__dirname, 'variables', 'index.scss');
+
+/**
  * Initialize.
  */
 async function init() {
-  variableMap = await transformVariables(path.join(__dirname, 'variables', 'index.scss'));
+  variableMap = await transformVariables(sassVariablesFile);
   await createCustomProps(variableMap, outputFile);
 }
 init();
