@@ -8,56 +8,27 @@ async function initFindAndReplace(variableMap, variableMap2) {
     const directoryPath = path.join(__dirname, '..', '..', 'files');
     const searchNeedles = ['semicolon', 'colon', 'space'];
     const stylingDatum = [];
-    const stylingDatum2 = [];
     variableMap2.forEach((variable) => {
       return searchNeedles.forEach((needle) => {
         switch (needle) {
           case 'semicolon':
-            stylingDatum2.push({
+            stylingDatum.push({
               replacement: variable.customPropKey,
               needle: `${variable.scssKey};`,
               type: 'semicolon',
             });
             break;
           case 'colon':
-            stylingDatum2.push({
+            stylingDatum.push({
               replacement: variable.customPropKey,
               needle: `${variable.scssKey},`,
               type: 'colon',
             });
             break;
           case 'space':
-            stylingDatum2.push({
+            stylingDatum.push({
               replacement: variable.customPropKey,
               needle: `${variable.scssKey} `,
-              type: 'space',
-            });
-            break;
-        }
-      });
-    });
-    Array.from(variableMap).forEach((variable) => {
-      const key = Object.keys(variable)[0];
-      return searchNeedles.forEach((needle) => {
-        switch (needle) {
-          case 'semicolon':
-            stylingDatum.push({
-              replacement: variable[key],
-              needle: `${key};`,
-              type: 'semicolon',
-            });
-            break;
-          case 'colon':
-            stylingDatum.push({
-              replacement: variable[key],
-              needle: `${key},`,
-              type: 'colon',
-            });
-            break;
-          case 'space':
-            stylingDatum.push({
-              replacement: variable[key],
-              needle: `${key} `,
               type: 'space',
             });
             break;
