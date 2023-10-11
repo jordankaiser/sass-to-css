@@ -10,16 +10,6 @@ async function getFileText(file) {
 }
 
 /**
- * This is a function.
- *
- * @param {string} filePath - A string param
- */
-function getFilePath(filePath) {
-  const outputFile = path.join(__dirname, 'variables', 'index.scss');
-  const dirname = __dirname;
-}
-
-/**
  * Append text to a file.
  *
  * @param {string} filePath - The file to append text to.
@@ -33,4 +23,4 @@ async function appendText(filePath, textToAppend) {
   }
 }
 
-module.exports = {getFileText, getFilePath, appendText};
+module.exports = {getFileText, appendText};
