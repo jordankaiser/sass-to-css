@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const {getReplacedFileText} = require('./scanAndReplace');
+const {getReplacedFileText} = require('./getReplacedFileText.js');
 const {getFileText} = require('./../_helpers/index.js');
 const {glob} = require('glob');
 
