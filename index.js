@@ -13,19 +13,19 @@ let variableMap = null;
  * The output file path for the custom properties. Customize as needed.
  */
 const outputFileInfo = {
-  path: path.join(__dirname, '..', 'custom-props'),
+  path: path.join(__dirname, 'custom-props'),
   file: 'custom-props.css',
 }
 
 /**
  * The SCSS variables file path. Customize as needed.
  */
-const sassVariablesFile = path.join(__dirname, '..', 'sass', '00_global', '_01.generated-vars.scss');
+const sassVariablesFile = path.join(__dirname, 'variables', 'index.scss');
 
 /**
  * The directory containing the SCSS files to transform. Customize as needed.
  */
-const sassFiles = path.join(__dirname, '..', 'sass');
+const sassFiles = path.join(__dirname, 'files');
 
 /**
  * Initialize.

@@ -1,14 +1,12 @@
-const fs = require('fs');
+const fs = require('fs/promises');
 const path = require('path');
 
 async function getFileText(file) {
-  return new Promise((resolve, reject) => {
-    try {
-      resolve(fs.readFileSync(file, 'utf8'));
-    }  catch (error) {
-      reject(error);
-    }
-  });
+  try {
+    return await fs.readFile(file, 'utf8');
+  }  catch (error) {
+    console.error('Error occurred get file text:', error)
+  }
 }
 
 /**
@@ -28,16 +26,11 @@ function getFilePath(filePath) {
  * @param {string} textToAppend - The text to append to the file.
  */
 async function appendText(filePath, textToAppend) {
-  return new Promise((resolve, reject) => {
-    try {
-      fs.appendFileSync(filePath, textToAppend);
-      console.log('Text appended to the file successfully.');
-      resolve();
-    } catch (err) {
-      console.error('Error appending to the file:', err);
-      reject(err);
-    }
-  });
+  try {
+    return await fs.appendFile(filePath, textToAppend);
+  } catch (err) {
+    console.error('Error appending to the file:', err);
+  }
 }
 
 module.exports = {getFileText, getFilePath, appendText};
