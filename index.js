@@ -2,6 +2,7 @@ const path = require('path');
 const createVariableMap = require('./js/transformVariables/index.js');
 const createCustomProps = require('./js/createCustomProps/index.js');
 const findAndReplace = require('./js/findAndReplace/index.js');
+const question = require('./js/prompts/index.js');
 
 /**
  * An array of objects containing the SCSS key, custom property key, and value.
@@ -31,8 +32,11 @@ const sassFiles = path.join(__dirname, 'files');
  * Initialize.
  */
 async function init() {
+  const confirmBegin = await question('begin');
+  if (!confirmBegin.value) return;
   variableMap = await createVariableMap(sassVariablesFile);
   await findAndReplace(variableMap, sassFiles, sassVariablesFile);
   await createCustomProps(variableMap, outputFileInfo);
 }
 init();
+
