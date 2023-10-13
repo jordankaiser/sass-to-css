@@ -49,6 +49,8 @@ async function question(type) {
 
   // If we have questions start asking them.
   if (questions) {
+
+    // Update response with answers.
     response = await prompts(questions);
   }
 
