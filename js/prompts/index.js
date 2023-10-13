@@ -9,35 +9,52 @@ async function question(type) {
         name: 'value',
         message: 'This will change text in your files. Ensure you have committed your work. Continue?',
         choices: [
-          { title: 'Yes', description: 'This option has a description', value: true },
-          { title: 'No', description: 'This option has a description', value: false },
+          { title: 'Yes', value: true },
+          { title: 'No', value: false },
         ],
-        initial: 1
+        initial: 0
       }
       break;
-    case 'end':
-      console.log('end');
+    case 'replace':
+      configuration = {
+        type: 'select',
+        name: 'value',
+        message: 'Replace your SCSS variables with CSS custom properties?',
+        choices: [
+          { title: 'Yes', value: true },
+          { title: 'No', value: false },
+        ],
+        initial: 0
+      }
+      break;
+    case 'create':
+      configuration = {
+        type: 'select',
+        name: 'value',
+        message: 'Create a CSS custom properties file from your SCSS variables?',
+        choices: [
+          { title: 'Yes', value: true },
+          { title: 'No', value: false },
+        ],
+        initial: 0
+      }
       break;
   
     default:
       break;
   }
-  const response = await prompts(configuration);
+  let response = {value: true};
+  if (configuration) {
+    response = await prompts(configuration);
+  }
 
   return new Promise((resolve) => {
     try {
-      if (response.value) {
-        resolve(response.value);
-      } else {
-        console.log('Exiting...');
-        return;
-      }
+      resolve(response.value);
     } catch(error) {
       console.log(error)
     }
   });
-  
-  console.log(response.value);
 };
 
 module.exports = question;
