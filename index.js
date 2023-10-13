@@ -32,8 +32,7 @@ const sassFiles = path.join(__dirname, 'files');
  * Initialize.
  */
 async function init() {
-  const confirmBegin = await question('begin');
-  if (!confirmBegin.value) return;
+  await question('begin');
   variableMap = await createVariableMap(sassVariablesFile);
   await findAndReplace(variableMap, sassFiles, sassVariablesFile);
   await createCustomProps(variableMap, outputFileInfo);

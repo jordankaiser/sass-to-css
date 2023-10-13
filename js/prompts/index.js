@@ -4,7 +4,6 @@ async function question(type) {
   let configuration = false;
   switch (type) {
     case 'begin':
-      console.log('begin');
       configuration = {
         type: 'select',
         name: 'value',
@@ -27,7 +26,12 @@ async function question(type) {
 
   return new Promise((resolve) => {
     try {
-      resolve(response);
+      if (response.value) {
+        resolve(response.value);
+      } else {
+        console.log('Exiting...');
+        return;
+      }
     } catch(error) {
       console.log(error)
     }
