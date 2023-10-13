@@ -1,10 +1,10 @@
 const prompts = require('prompts');
 
 async function question(type) {
-  let configuration = false;
+  let questions = false;
   switch (type) {
     case 'begin':
-      configuration = {
+      questions = {
         type: 'select',
         name: 'value',
         message: 'This will change text in your files. Ensure you have committed your work. Continue?',
@@ -16,7 +16,7 @@ async function question(type) {
       }
       break;
     case 'replace':
-      configuration = {
+      questions = {
         type: 'select',
         name: 'value',
         message: 'Replace your SCSS variables with CSS custom properties?',
@@ -28,7 +28,7 @@ async function question(type) {
       }
       break;
     case 'create':
-      configuration = {
+      questions = {
         type: 'select',
         name: 'value',
         message: 'Create a CSS custom properties file from your SCSS variables?',
@@ -43,9 +43,13 @@ async function question(type) {
     default:
       break;
   }
+
+  // Assume true for all questions if we can't ask the user.
   let response = {value: true};
-  if (configuration) {
-    response = await prompts(configuration);
+
+  // If we have questions start asking them.
+  if (questions) {
+    response = await prompts(questions);
   }
 
   return new Promise((resolve) => {
