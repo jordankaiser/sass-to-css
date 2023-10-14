@@ -1,5 +1,11 @@
 const prompts = require('prompts');
 
+/**
+ *  Ask questions using the command line.
+ *
+ * @param {string} type - The question type.
+ * @return {boolean} Whether the answer is true or false.
+ */
 async function question(type) {
   let questions = false;
   switch (type) {
