@@ -33,7 +33,7 @@ const sassVariablesFile = path.join(__dirname, scssVariablesFile);
 /**
  * The directory containing the SCSS files to transform.
  */
-const sassFiles = path.join(__dirname, scssFiles);
+const scssFilePath = path.join(__dirname, scssFiles);
 
 /**
  * Initialize.
@@ -46,7 +46,7 @@ async function init() {
     // Create the custom properties file.
     const addComments = await question('addComments');
     if (addComments) {
-      await addFileComments();
+      await addFileComments(scssFilePath);
     }
 
     // Create the custom properties file.
@@ -58,7 +58,7 @@ async function init() {
     // Find and replace the SCSS variables with custom properties.
     const replace = await question('replace');
     if (replace) {
-      await findAndReplace(variableMap, sassFiles, sassVariablesFile);
+      await findAndReplace(variableMap, scssFilePath, sassVariablesFile);
     }
   }
   console.log('\nExiting.\n');
