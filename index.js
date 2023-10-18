@@ -3,6 +3,7 @@ const createVariableMap = require('./js/transformVariables/index.js');
 const createCustomProps = require('./js/createCustomProps/index.js');
 const findAndReplace = require('./js/findAndReplace/index.js');
 const question = require('./js/prompts/index.js');
+const addFileComments = require('./js/addFileComments/index.js');
 const {
   customPropertiesPath,
   customPropertiesFileName,
@@ -41,6 +42,12 @@ async function init() {
   const begin = await question('begin');
   if (begin) {
     variableMap = await createVariableMap(sassVariablesFile);
+
+    // Create the custom properties file.
+    const addComments = await question('addComments');
+    if (addComments) {
+      await addFileComments();
+    }
 
     // Create the custom properties file.
     const create = await question('create');
