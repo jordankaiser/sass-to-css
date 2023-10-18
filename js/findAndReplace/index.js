@@ -35,6 +35,7 @@ async function findAndReplace(variableMap, directoryPath, sassVariablesFile) {
         }
       });
     });
+    // TODO: Hook ignore up to the config file.
     const directories = await glob(directoryPath + '/**/*.scss', { ignore: '_01.generated-vars.scss' });
     const filesText = [];
     for (const file of directories) {

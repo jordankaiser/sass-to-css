@@ -39,27 +39,29 @@ const scssFilePath = path.join(__dirname, scssFiles);
  * Initialize.
  */
 async function init() {
-  const begin = await question('begin');
+  // const begin = await question('begin');
+  const begin = true;
   if (begin) {
     variableMap = await createVariableMap(sassVariablesFile);
 
     // Create the custom properties file.
-    const addComments = await question('addComments');
+    // const addComments = await question('addComments');
+    const addComments = true;
     if (addComments) {
       await addFileComments(scssFilePath);
     }
 
     // Create the custom properties file.
-    const create = await question('create');
-    if (create) {
-      await createCustomProps(variableMap, outputFileInfo);
-    }
+    // const create = await question('create');
+    // if (create) {
+    //   await createCustomProps(variableMap, outputFileInfo);
+    // }
 
     // Find and replace the SCSS variables with custom properties.
-    const replace = await question('replace');
-    if (replace) {
-      await findAndReplace(variableMap, scssFilePath, sassVariablesFile);
-    }
+    // const replace = await question('replace');
+    // if (replace) {
+    //   await findAndReplace(variableMap, scssFilePath, sassVariablesFile);
+    // }
   }
   console.log('\nExiting.\n');
 }
