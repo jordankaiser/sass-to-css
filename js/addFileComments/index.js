@@ -9,7 +9,7 @@ const {getFileText} = require('./../_helpers/index.js');
  * @param {array} ignoreDirectories - The directories to ignore.
  */
 async function addFileComments(scssFilePath, ignoreDirectoryPaths) {
-  const directories = await glob(scssFilePath + '**/*.scss', { ignore: ignoreDirectoryPaths });
+  const directories = await glob(scssFilePath + '/**/*.scss', { ignore: ignoreDirectoryPaths });
   const filesText = [];
   for (const file of directories) {
     const fileText = await getFileText(file);
