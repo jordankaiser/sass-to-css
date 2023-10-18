@@ -54,7 +54,7 @@ async function init() {
       await findAndReplace(variableMap, sassFiles, sassVariablesFile);
     }
   }
-  console.log('Exiting.');
+  console.log('\nExiting.\n');
 }
 init();
 
