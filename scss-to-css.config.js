@@ -16,7 +16,7 @@ const scssFiles = '../sass/';
 
 // Directores to be ignored.
 // TODO: Write comment out more once this is implemented.
-const ignoreDirectories = ['lib/**'];
+const ignoreDirectories = ['../sass/lib/**', '../sass/print/**', '../sass/select2-theme/**'];
 
 module.exports = {
   customPropertiesPath,
