@@ -29,7 +29,7 @@ async function addFileComments(scssFilePath, ignoreDirectoryPaths) {
 /**
  * Adds a comment to the top and bottom of a file.
  *
- * @param {string} n - The text that needs comments.
+ * @param {string} text - The text that needs comments.
  * @return {string} The text with comments inserted.
  */
 function insertComments(text) {
