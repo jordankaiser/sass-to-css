@@ -10,11 +10,6 @@ const {
   scssFiles,
 } = require('./scss-to-css.config.js');
 
-console.log(customPropertiesPath);
-console.log(customPropertiesFileName);
-console.log(scssVariablesFile);
-console.log(scssFiles);
-
 /**
  * An array of objects containing the SCSS key, custom property key, and value.
  * A map of the data needed to tranform SCSS to CSS.
@@ -22,7 +17,7 @@ console.log(scssFiles);
 let variableMap = null;
 
 /**
- * The output file path for the custom properties. Customize as needed.
+ * The output file path for the custom properties.
  */
 const outputFileInfo = {
   path: path.join(__dirname, customPropertiesPath),
@@ -30,12 +25,12 @@ const outputFileInfo = {
 }
 
 /**
- * The SCSS variables file path. Customize as needed.
+ * The SCSS variables file path.
  */
 const sassVariablesFile = path.join(__dirname, scssVariablesFile);
 
 /**
- * The directory containing the SCSS files to transform. Customize as needed.
+ * The directory containing the SCSS files to transform.
  */
 const sassFiles = path.join(__dirname, scssFiles);
 
@@ -46,13 +41,17 @@ async function init() {
   const begin = await question('begin');
   if (begin) {
     variableMap = await createVariableMap(sassVariablesFile);
-    const replace = await question('replace');
-    if (replace) {
-      await findAndReplace(variableMap, sassFiles, sassVariablesFile);
-    }
+
+    // Create the custom properties file.
     const create = await question('create');
     if (create) {
       await createCustomProps(variableMap, outputFileInfo);
+    }
+
+    // Find and replace the SCSS variables with custom properties.
+    const replace = await question('replace');
+    if (replace) {
+      await findAndReplace(variableMap, sassFiles, sassVariablesFile);
     }
   }
   console.log('Exiting.');
