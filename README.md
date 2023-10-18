@@ -9,7 +9,7 @@ This tool includes a CLI which can be started by running `npm run start`.
 
 # Instructions
 
-1. Configure the variables in `sass-to-css.config.js`.
+1. Configure the variables in `scss-to-css.config.js`.
 2. Run `npm run start`.
 
 # Notes
