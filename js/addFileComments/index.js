@@ -23,9 +23,14 @@ async function addFileComments(scssFilePath) {
       fs.writeFileSync(file.path, fileWithComments, 'utf8');
     }
   }
-  console.log('filesText', filesText);
 }
 
+/**
+ * Adds a comment to the top and bottom of a file.
+ *
+ * @param {string} n - The text that needs comments.
+ * @return {string} The text with comments inserted.
+ */
 function insertComments(text) {
   const commentTop = `/* REPLACER_START ${text.path} */\n`;
   const commentBottom = `\n/* REPLACER_END ${text.path} */`;
