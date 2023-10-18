@@ -37,6 +37,12 @@ const sassVariablesFile = path.join(__dirname, scssVariablesFile);
 const scssFilePath = path.join(__dirname, scssFiles);
 
 /**
+ * Ignore directories.
+ * TODO: Write comment out more once this is implemented.
+ */
+const ignoreDirectoryPaths = ignoreDirectories.map((directory) => path.join(__dirname, directory));
+
+/**
  * Initialize.
  */
 async function init() {
@@ -49,7 +55,7 @@ async function init() {
     // const addComments = await question('addComments');
     const addComments = true;
     if (addComments) {
-      await addFileComments(scssFilePath, ignoreDirectories);
+      await addFileComments(scssFilePath, ignoreDirectoryPaths);
     }
 
     // Create the custom properties file.
