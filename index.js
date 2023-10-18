@@ -9,6 +9,7 @@ const {
   customPropertiesFileName,
   scssVariablesFile,
   scssFiles,
+  ignoreDirectories,
 } = require('./scss-to-css.config.js');
 
 /**
@@ -48,7 +49,7 @@ async function init() {
     // const addComments = await question('addComments');
     const addComments = true;
     if (addComments) {
-      await addFileComments(scssFilePath);
+      await addFileComments(scssFilePath, ignoreDirectories);
     }
 
     // Create the custom properties file.

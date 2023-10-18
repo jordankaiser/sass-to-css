@@ -15,3 +15,5 @@ This tool includes a CLI which can be started by running `npm run start`.
 # Notes
 
 See `.nvmrc` for required node version.
+
+> Do not run this tool while your are also compiling SCSS!
