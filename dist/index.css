@@ -1,62 +1,38 @@
-/**
- * REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-one.scss
- */
- .banana {
+/* REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-one.scss */
+.banana {
   color: $color;
   position: inherit;
 }
-/**
- * REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-one.scss
- */
-/**
- * REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-three.scss
- */
- .watermelon {
+/* REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-one.scss */
+/* REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-three.scss */
+.watermelon {
   width: $width;
   position: absolute;
 }
-/**
- * REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-three.scss
- */
-/**
- * REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-two.scss
- */
- .cherry {
+/* REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-three.scss */
+/* REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-two.scss */
+.cherry {
   padding: $padding;
   margin-bottom: $marginBottom;
   position: relative;
 }
-/**
- * REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-two.scss
- */
-/**
- * REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-1-file-one.scss
- */
- .banana {
+/* REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/file-two.scss */
+/* REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-1-file-one.scss */
+.banana {
   color: $color;
   position: inherit;
 }
-/**
- * REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-1-file-one.scss
- */
-/**
- * REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-1-file-two.scss
- */
- .cherry {
+/* REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-1-file-one.scss */
+/* REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-1-file-two.scss */
+.cherry {
   padding: $padding;
   margin-bottom: $marginBottom;
   position: relative;
 }
-/**
- * REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-1-file-two.scss
- */
-/**
- * REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-2-directory/level-2-file.scss
- */
- .watermelon {
+/* REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-1-file-two.scss */
+/* REPLACER_START /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-2-directory/level-2-file.scss */
+.watermelon {
   width: $width;
   position: absolute;
 }
-/**
- * REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-2-directory/level-2-file.scss
- */
+/* REPLACER_END /Users/jordank/Sites/lvhn/web/themes/custom/ts_lvhn/sass-to-css/files/level-1-directory/level-2-directory/level-2-file.scss */
