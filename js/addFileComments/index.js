@@ -33,8 +33,8 @@ async function addFileComments(scssFilePath, ignoreDirectoryPaths) {
  * @return {string} The text with comments inserted.
  */
 function insertComments(text) {
-  const commentTop = `/* REPLACER_START ${text.path} */\n`;
-  const commentBottom = `\n/* REPLACER_END ${text.path} */`;
+  const commentTop = `/**\n * REPLACER_START ${text.path}\n */\n`;
+  const commentBottom = `/**\n * REPLACER_END ${text.path}\n */\n`;
   return commentTop + text.text + commentBottom;
 }
 
