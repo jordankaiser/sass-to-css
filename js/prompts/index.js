@@ -58,6 +58,19 @@ async function question(type) {
         initial: 0
       }
       break;
+
+    case 'createCSS':
+      questions = {
+        type: 'select',
+        name: 'value',
+        message: 'Create CSS files?',
+        choices: [
+          { title: 'Yes', value: true },
+          { title: 'No', value: false },
+        ],
+        initial: 0
+      }
+      break;
       
     default:
       break;

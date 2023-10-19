@@ -1,6 +1,6 @@
 const fs = require('fs');
 const {glob} = require('glob');
-const {getFileText} = require('./../_helpers/index.js');
+const {getFileText} = require('../_helpers/index.js');
 
 /**
  * Add comments to files to indicate where they where created.
