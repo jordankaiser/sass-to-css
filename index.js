@@ -48,8 +48,8 @@ const ignoreDirectoryPaths = ignoreDirectories.map((directory) => path.join(__di
  * Initialize.
  */
 async function init() {
-  // const begin = await question('begin');
-  const begin = true;
+  const begin = await question('begin');
+  // const begin = true;
   if (begin) {
     variableMap = await createVariableMap(sassVariablesFile);
 
