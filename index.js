@@ -3,6 +3,14 @@ const createVariableMap = require('./js/transformVariables/index.js');
 const createCustomProps = require('./js/createCustomProps/index.js');
 const findAndReplace = require('./js/findAndReplace/index.js');
 const question = require('./js/prompts/index.js');
+const addFileComments = require('./js/addFileComments/index.js');
+const {
+  customPropertiesPath,
+  customPropertiesFileName,
+  scssVariablesFile,
+  scssFiles,
+  ignoreDirectories,
+} = require('./scss-to-css.config.js');
 
 /**
  * An array of objects containing the SCSS key, custom property key, and value.
@@ -11,40 +19,58 @@ const question = require('./js/prompts/index.js');
 let variableMap = null;
 
 /**
- * The output file path for the custom properties. Customize as needed.
+ * The output file path for the custom properties.
  */
 const outputFileInfo = {
-  path: path.join(__dirname, 'custom-props'),
-  file: 'custom-props.css',
+  path: path.join(__dirname, customPropertiesPath),
+  file: customPropertiesFileName,
 }
 
 /**
- * The SCSS variables file path. Customize as needed.
+ * The SCSS variables file path.
  */
-const sassVariablesFile = path.join(__dirname, 'variables', 'index.scss');
+const sassVariablesFile = path.join(__dirname, scssVariablesFile);
 
 /**
- * The directory containing the SCSS files to transform. Customize as needed.
+ * The directory containing the SCSS files to transform.
  */
-const sassFiles = path.join(__dirname, 'files');
+const scssFilePath = path.join(__dirname, scssFiles);
+
+/**
+ * Ignore directories.
+ * TODO: Write comment out more once this is implemented.
+ */
+const ignoreDirectoryPaths = ignoreDirectories.map((directory) => path.join(__dirname, directory));
 
 /**
  * Initialize.
  */
 async function init() {
-  const begin = await question('begin');
+  // const begin = await question('begin');
+  const begin = true;
   if (begin) {
     variableMap = await createVariableMap(sassVariablesFile);
-    const replace = await question('replace');
-    if (replace) {
-      await findAndReplace(variableMap, sassFiles, sassVariablesFile);
+
+    // Create the custom properties file.
+    // const addComments = await question('addComments');
+    const addComments = true;
+    if (addComments) {
+      await addFileComments(scssFilePath, ignoreDirectoryPaths);
     }
-    const create = await question('create');
-    if (create) {
-      await createCustomProps(variableMap, outputFileInfo);
-    }
+
+    // Create the custom properties file.
+    // const create = await question('create');
+    // if (create) {
+    //   await createCustomProps(variableMap, outputFileInfo);
+    // }
+
+    // Find and replace the SCSS variables with custom properties.
+    // const replace = await question('replace');
+    // if (replace) {
+    //   await findAndReplace(variableMap, scssFilePath, sassVariablesFile);
+    // }
   }
-  console.log('Exiting.');
+  console.log('\nExiting.\n');
 }
 init();
 

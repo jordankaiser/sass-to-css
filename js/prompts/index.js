@@ -46,6 +46,19 @@ async function question(type) {
       }
       break;
   
+    case 'addComments':
+      questions = {
+        type: 'select',
+        name: 'value',
+        message: 'Add comments to your SCSS files?',
+        choices: [
+          { title: 'Yes', value: true },
+          { title: 'No', value: false },
+        ],
+        initial: 0
+      }
+      break;
+      
     default:
       break;
   }
