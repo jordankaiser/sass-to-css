@@ -13,6 +13,6 @@
     "escape-string-regexp-node": "^1.0.2",
     "glob": "^10.3.10",
     "prompts": "^2.4.2",
-    "sass": "^1.68.0"
+    "sass": "^1.69.4"
   }
 }

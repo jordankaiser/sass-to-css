@@ -55,7 +55,8 @@ async function init() {
     // const addComments = await question('addComments');
     const addComments = true;
     if (addComments) {
-      await addFileComments(scssFilePath, ignoreDirectoryPaths);
+      // await addFileComments(scssFilePath, ignoreDirectoryPaths);
+      addFileComments(path.join(__dirname, 'files', 'file-one.scss'));
     }
 
     // Create the custom properties file.
