@@ -30,6 +30,7 @@ async function addFileCommentsFoo(scssFilePath, ignoreDirectoryPaths) {
 
 
 async function addFileComments(inputPathf) {
+  console.log('chexk');
   // const outputPath = inputPath.replace('.scss', '.css');
   const inputPath = path.join(__dirname, '..', '..', 'files', 'file-one.scss');
   const outputPath = path.join(__dirname, '..', '..', 'files', 'file-one.css');

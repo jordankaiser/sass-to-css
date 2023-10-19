@@ -22,10 +22,10 @@ function processText(fileText) {
     const filePath = match[1];
     const codeBetweenComments = match[2];
 
-    console.log('File Path:', filePath);
-    console.log('Code Between Comments:');
-    console.log(codeBetweenComments);
-    console.log('------------------------------');
+    // console.log('File Path:', filePath);
+    // console.log('Code Between Comments:');
+    // console.log(codeBetweenComments);
+    // console.log('------------------------------');
   }
 }
 
