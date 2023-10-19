@@ -18,10 +18,13 @@ const scssFiles = 'files';
 const ignoreDirectories = [];
 // const ignoreDirectories = ['../sass/lib/**', '../sass/print/**', '../sass/select2-theme/**', '../sass/style.scss', '../sass/select2-theme.scss', '../sass/00_global/_01.generated-vars.scss'];
 
+const cssFile = 'dist/index.css';
+
 module.exports = {
   customPropertiesPath,
   customPropertiesFileName,
   scssVariablesFile,
   scssFiles,
   ignoreDirectories,
+  cssFile,
 };
