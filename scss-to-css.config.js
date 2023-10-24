@@ -16,11 +16,11 @@ const scssFiles = '../sass/';
 // Directores to be ignored. If no directories are to be ignored put an empty array.
 // TODO: Write comment out more once this is implemented.
 // const ignoreDirectories = [];
-const ignoreDirectories = ['../sass/lib/**', '../sass/print/**', '../sass/select2-theme/**', '../sass/style.scss', '../sass/select2-theme.scss', '../sass/00_global/_01.generated-vars.scss'];
+const ignoreDirectories = ['../sass/lib/**', '../sass/style.scss', '../sass/select2-theme.scss', '../sass/00_global/_01.generated-vars.scss', '../sass/lib/bourbon/**', '../sass/lib/neat/**', '../sass/lib/slick/fonts/**', , '../sass/lib/slick/ajax-loader.gif'];
 
 // The compiled CSS file. Relative to this directory.
 // const cssFile = 'dist/index.css';
-const cssFile = '../css/style.css';
+const cssFile = '../css/select2-theme.css';
 
 module.exports = {
   customPropertiesPath,
